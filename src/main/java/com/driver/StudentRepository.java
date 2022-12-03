@@ -27,11 +27,11 @@ public class StudentRepository {
         teachersRecord.put(teacher.getName(), teacher);
     }
 
-    public void addstudentTeacherPair(String student,String teacher){
+    public void addStudentTeacherPair(String student,String teacher){
         if(studentsRecord.containsKey(student) && teachersRecord.containsKey(teacher)){
             studentsRecord.put(student,studentsRecord.get(student));
             teachersRecord.put(teacher,teachersRecord.get(teacher));
-            List<String> students = new ArrayList<>();
+            List<String> students = new ArrayList<String>();
             if(studentTeacherMapping.containsKey(teacher))students = studentTeacherMapping.get(teacher);
             students.add(student);
             studentTeacherMapping.put(teacher,students);
@@ -47,7 +47,7 @@ public class StudentRepository {
     }
 
     public List<String> listOfStudents(String teacher){
-        List<String> studentList = new ArrayList<>();
+        List<String> studentList = new ArrayList<String>();
         if(studentTeacherMapping.containsKey(teacher)){
             studentList = studentTeacherMapping.get(teacher);
         }
@@ -75,9 +75,9 @@ public class StudentRepository {
         }
     }
     public void deleteAllTeachers(){
-        HashSet<String> studentsList = new HashSet<>();
+        HashSet<String> studentsList = new HashSet<String>();
         for(String teacher : studentTeacherMapping.keySet()){
-            for(String student : studentsRecord.keySet()){
+            for(String student : studentTeacherMapping.get(teacher)){
                 studentsList.add(student);
             }
         }
